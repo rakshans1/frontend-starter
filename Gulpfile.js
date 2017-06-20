@@ -1,6 +1,7 @@
 'use strict';
 
-var browserSync = require('browser-sync').create();
+var browserSync = require('browser-sync');
+const hygienist   = require('hygienist-middleware');
 var fs = require('fs');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
@@ -23,6 +24,7 @@ var webpackHotMiddleware = require('webpack-hot-middleware');
 var webpackDevMiddleware = require("webpack-dev-middleware");
 
 handlebars.Handlebars.registerHelper(layouts(handlebars.Handlebars));
+const bundler = webpack(config);
 
 gulp.task('webpack', function(callback) {
   webpack(config, function (err, stats) {
@@ -104,13 +106,13 @@ gulp.task('clean', function(cb) {
 
 gulp.task('watch', function() {
   gulp.watch(['./src//views/templates/**/*.hbs', './src//views/partials/**/*.hbs', 'data.yml'], ['templates'], reload);
-  gulp.watch('./src/assets/css/**/*.scss', ['webpack'], reload);
+  // gulp.watch('./src/assets/css/**/*.scss', ['webpack']);
   gulp.watch('./src/assets/img/**/*', ['images'], reload);
-  gulp.watch(['./src/assets/js/**/*.js', './src/index.js', 'Gulpfile.js'], ['webpack']);
+  // gulp.watch(['./src/assets/js/**/*.js', './src/index.js', 'Gulpfile.js'], ['webpack']);
 });
 
 gulp.task('build', function (cb) {
-  return runSequence('clean', ['images', 'fonts', 'webpack', 'templates'], cb);
+  return runSequence('clean', ['images', 'fonts', 'templates'], cb);
 });
 
 gulp.task('build:optimized', function(cb) {
@@ -123,17 +125,17 @@ gulp.task('build:optimized', function(cb) {
 gulp.task('serve', ['build'], function() {
 
   // Serve files from the root of this project
-  browserSync.init(['./dist/**/*'], {
-    ghostMode: {
-      clicks: false,
-      forms: false,
-      scroll: false,
+  browserSync({
+    port: 3000,
+    ui: {
+      port: 8080
     },
     server: {
-      baseDir: './dist',
+      baseDir: 'dist',
       middleware: [
         // historyApiFallback(),
-        webpackDevMiddleware(webpack(config), {
+        hygienist("dist"),
+        webpackDevMiddleware(bundler, {
           // Dev middleware can't access config, so we provide publicPath
           publicPath: config.output.publicPath,
 
@@ -153,7 +155,7 @@ gulp.task('serve', ['build'], function() {
           // for other settings see
           // http://webpack.github.io/docs/webpack-dev-middleware.html
         }),
-        webpackHotMiddleware(webpack(config),{
+        webpackHotMiddleware(bundler,{
           log: () => {}
         }),
       ]

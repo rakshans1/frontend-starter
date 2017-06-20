@@ -89,12 +89,14 @@ Runs `gulp watch` in the background, and serves the `dist` directory at `localho
 ├── dist/                   # Gulp builds the static site into this directory
 ├── package.json            # Dependencies
 └── src/                    # All source code
-    ├── font/               # Font files
-    ├── img/                # Images and SVGs
-    ├── js/                 # Javascript libraries and scripts
-    ├── partials/           # Handlebars HTML partials that are included / extended
-    ├── css/                # Stylesheets
-    └── templates/          # Handlebars HTML files, one per page on the site.
+    ├── assets/ 
+        ├── css/                # Stylesheets
+        ├── font/               # Font files
+        ├── img/                # Images and SVGs
+        ├── js/                 # Javascript libraries and scripts
+    ├── views/     
+        ├── partials/           # Handlebars HTML partials that are included / extended
+        └── templates/          # Handlebars HTML files, one per page on the site.
 ```
 
 [browsersync]: http://www.browsersync.io/
