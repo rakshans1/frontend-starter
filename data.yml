@@ -1,0 +1,11 @@
+meta:
+  title: "Frontend Starter Kit"
+  description: "Frontend boilerplate for local frontend web development."
+  facebook_image: ""  # /img/facebook.png
+  twitter_image: ""  # /img/twitter.png
+  image: ""  # /img/share.png
+  twitter_handle: ""  # @rakshans1
+  domain: ""  #  rakshanshetty.in
+  url: ""  #     http://rakshanshetty.in
+  google_analytics_id: "" # UA-66637918-1
+  theme_color: "" # #FFFFFF
