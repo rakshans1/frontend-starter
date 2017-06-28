@@ -19,8 +19,12 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('development'), // Tells React to build in either dev or prod modes. https://facebook.github.io/react/downloads.html (See bottom)
       __DEV__: true
     }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
     new webpack.NoEmitOnErrorsPlugin,
-    new webpack.HotModuleReplacementPlugin,
+    new webpack.HotModuleReplacementPlugin
   ],
   module: {
     rules: [
@@ -42,13 +46,13 @@ module.exports = {
       ]
     },
     {
-      test: /\.(woff|woff2|eot|ttf|otf)$/,
+      test: /\.(woff|woff2|eot|ttf|otf|svg|)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
       use: [
-        'file-loader'
+        'url-loader?limit=100000r'
       ]
     },
     {
-      test: /\.(png|svg|jpg|gif|ico)$/,
+      test: /\.(png|jpg|gif|ico)$/,
       use: [
         'file-loader'
       ]

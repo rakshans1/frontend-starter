@@ -1,6 +1,10 @@
-@import "0-tools/fonts";
-@import "~bootstrap/dist/css/bootstrap";
+// $fa-font-path: "~font-awesome/fonts";
+// @import "~font-awesome/scss/font-awesome.scss";
 
+@import "0-tools/fonts";
+@import "0-tools/bootstrap";
+
+@import "1-base/mixin";
 @import "1-base/vars";
 @import "1-base/base";
 

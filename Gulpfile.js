@@ -1,6 +1,8 @@
 'use strict';
 
-var browserSync = require('browser-sync');
+var autoprefixer = require('gulp-autoprefixer');
+var cssnano = require('gulp-cssnano');
+var browserSync = require('browser-sync').create();
 const hygienist   = require('hygienist-middleware');
 var fs = require('fs');
 var gulp = require('gulp');
@@ -11,8 +13,8 @@ var imagemin = require('gulp-imagemin');
 var inlinesource = require('gulp-inline-source');
 var layouts = require('handlebars-layouts');
 var plumber = require('gulp-plumber');
-var reload = browserSync.reload;
 var rename = require('gulp-rename');
+var reload = browserSync.reload;
 var replace = require('gulp-replace');
 var yaml = require('js-yaml');
 var rimraf = require('rimraf');
@@ -20,6 +22,7 @@ var runSequence = require('run-sequence');
 var path = require('path');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
+var configProd = require('./webpack.config.prod');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var webpackDevMiddleware = require("webpack-dev-middleware");
 
@@ -43,23 +46,48 @@ gulp.task('webpack', function(callback) {
     });
 });
 
+gulp.task('webpack:optimized', function(callback) {
+  webpack(configProd, function (err, stats) {
+        if (err)
+            throw new gutil.PluginError('webpack:build', err);
+        gutil.log('[webpack:build] Completed\n' + stats.toString({
+            assets: true,
+            chunks: false,
+            chunkModules: false,
+            colors: true,
+            hash: false,
+            timings: false,
+            version: false
+        }));
+        callback();
+    });
+});
+
+gulp.task('css:optimized', function() {
+  return gulp.src('./dist/assets/css/*.css')
+    .pipe(plumber())
+    .pipe(autoprefixer())
+    .pipe(cssnano({discardComments: {removeAll: true}}))
+    .pipe(gulp.dest('dist/assets/css/'));
+});
+
 gulp.task('images', function() {
   return gulp.src('src/assets/img/**/*')
     .pipe(plumber())
     .pipe(imagemin({
       progressive: true,
     }))
-    .pipe(gulp.dest('./dist/img'));
+    .pipe(gulp.dest('./dist/assets/img'));
 });
 
 gulp.task('images:optimized', function() {
-  return gulp.src('src/img/**/*')
+  return gulp.src('src/assets/img/**/*')
     .pipe(plumber())
     .pipe(imagemin({
       progressive: true,
       multipass: true,
     }))
-    .pipe(gulp.dest('./dist/img'));
+    .pipe(gulp.dest('./dist/assets/img'));
 });
 
 gulp.task('fonts', function() {
@@ -107,17 +135,18 @@ gulp.task('clean', function(cb) {
 gulp.task('watch', function() {
   gulp.watch(['./src//views/templates/**/*.hbs', './src//views/partials/**/*.hbs', 'data.yml'], ['templates'], reload);
   // gulp.watch('./src/assets/css/**/*.scss', ['webpack']);
-  gulp.watch('./src/assets/img/**/*', ['images'], reload);
+gulp.watch('./src/assets/img/**/*', ['images'], reload);
   // gulp.watch(['./src/assets/js/**/*.js', './src/index.js', 'Gulpfile.js'], ['webpack']);
 });
 
 gulp.task('build', function (cb) {
-  return runSequence('clean', ['images', 'fonts', 'templates'], cb);
+  return runSequence('clean', ['images', 'fonts', 'webpack', 'templates'], cb);
 });
 
 gulp.task('build:optimized', function(cb) {
   return runSequence('clean',
-    ['images:optimized', 'fonts', 'webpack', 'templates:optimized'],
+    ['images', 'webpack:optimized', 'templates'],
+    'css:optimized',
     cb);
 });
 
@@ -125,11 +154,8 @@ gulp.task('build:optimized', function(cb) {
 gulp.task('serve', ['build'], function() {
 
   // Serve files from the root of this project
-  browserSync({
-    port: 3000,
-    ui: {
-      port: 8080
-    },
+  browserSync.init(['./dist/**/*'],{
+    port: process.env.port || 3000,
     server: {
       baseDir: 'dist',
       middleware: [

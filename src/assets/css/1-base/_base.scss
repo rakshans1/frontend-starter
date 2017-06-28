@@ -1,0 +1,173 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	line-height: 24px;
+	 -webkit-font-smoothing: antialiased !important;
+	&.has-fixed-navbar {
+		margin-top: 80px;
+	}
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	color: $text-color-dark;
+	font-weight: 600;
+}
+h1, .h1 {
+	font-size: 3.6rem;
+	line-height: 4.8rem;
+	margin-bottom: 16px;
+}
+h2, .h2 {
+	font-size: 3rem;
+	line-height: 4.1rem;
+	margin-bottom: 16px;
+}
+h3, .h3 {
+	font-size: 2.4rem;
+	line-height: 3.2rem;
+	margin-bottom: 16px;
+}
+h4, .h4 {
+	font-size: 1.8rem;
+	line-height: 2.8rem;
+}
+h5, .h5 {
+	font-size: 1.6rem;
+	line-height: 2.6rem;
+}
+h6, .h6 {
+	font-size: 1.2rem;
+	line-height: 1.6rem;
+}
+a {
+	color: $main-color;
+	@include transition(all 0.2s);
+	&:hover, &:focus {
+		color: darken($main-color, 10%);
+		text-decoration: none;
+		outline: none;
+	}
+}
+p {
+	margin-bottom: 30px;
+}
+.btn {
+	font-size: 14px;
+	height: 40px;
+	line-height: 38px;
+	padding: 0px 24px;
+	border: 1px solid $border-color;
+	color: text-color;
+	@include transition(all 0.2s);
+	&:hover, &:focus, &:active, &:active:hover, &:active:focus {
+		background: transparent;
+		color: $main-color;
+		outline: none;
+		@include box-shadow(none);
+	}
+}
+.btn-sm {
+	padding: 0px 16px;
+	font-size: 12px;
+	line-height: 30px;
+	height: 32px;
+}
+.btn-default {
+	background-color: $white;
+	&:hover, &:focus, &:active, &:active:hover, &:active:focus {
+		background-color: $main-color;
+		border: 1px solid $main-color;
+		color: $white;
+	}
+}
+.btn-primary {
+	background-color: $main-color;
+	border-color: $main-color;
+	color: $white;
+	&:hover, &:focus, &:active, &:active:hover, &:active:focus {
+		background-color: darken($main-color, 10%);
+		border: 1px solid darken($main-color, 10%);
+		color: $white;
+	}
+}
+input[type='text'], input[type='email'], input[type='url'] {
+	padding: 0 16px;
+	height: 40px;
+	border: 1px solid $border-color;
+	@include box-shadow(none);
+	&:focus {
+		border: 1px solid $main-color;
+		outline: none;
+		@include box-shadow(none);
+	}
+}
+.form-control {
+	height: 40px;
+}
+figcaption {
+	text-align: center;
+	font-size: 12px;
+}
+blockquote {
+	border-left: 2px solid $main-color;
+	color: $text-color-light;
+	font-size: 2.4rem;
+	line-height: 4rem;
+	font-weight: 300;
+	font-style: italic;
+	padding: 0px 20px;
+	margin-top: 32px;
+	margin-bottom: 32px;
+}
+cite {
+	font-size: 1.6rem;
+	font-style: normal;
+	color: $text-color-light;
+	font-weight: 400;
+}
+iframe {
+	border: none;
+}
+hr {
+	margin: 32px 0px;
+	border-top: 1px solid fade($border-color, 50%);
+}
+pre {
+	font-size: 1.6rem;
+	line-height: 2.4rem;
+	padding: 0;
+	border: none;
+}
+table {
+	border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+}
+table, th, td {
+	border: 1px solid $border-color;
+}
+th, td {
+	padding: 4px 8px;
+}
+dd, dt {
+	line-height: 24px;
+}
+.footnotes {
+	padding: 24px;
+	font-size: 1.4rem;
+}
+::-moz-selection {
+    color: $white;
+    background: $main-color;
+    text-shadow: none;
+}
+::selection {
+    color: $white;
+    background: $main-color;
+    text-shadow: none;
+}
+.hljs {
+	padding: 16px;
+}
+.align-center {
+	text-align: center;
+}

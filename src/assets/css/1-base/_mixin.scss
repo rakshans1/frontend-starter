@@ -1,0 +1,20 @@
+/*====================================================
+	MIXINS
+====================================================*/
+@mixin box-shadow ($string) {
+	box-shadow: $string;
+}
+@mixin border-radius ($string: 3px) {
+	border-radius: $string;
+}
+@mixin transition ($transition) {
+	transition: $transition; 
+}
+@mixin transform($string){
+	transform: $string;
+}
+@mixin opacity ($value: 1) {
+	opacity: $value;
+	$value-percentage: $value * 100;
+	filter: "alpha(opacity=(${value-percentage}))";
+}
