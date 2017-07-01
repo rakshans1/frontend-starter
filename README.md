@@ -90,13 +90,13 @@ Runs `gulp watch` in the background, and serves the `dist` directory at `localho
 ├── package.json            # Dependencies
 └── src/                    # All source code
     ├── assets/ 
-        ├── css/                # Stylesheets
-        ├── font/               # Font files
-        ├── img/                # Images and SVGs
-        ├── js/                 # Javascript libraries and scripts
+        ├── css/            # Stylesheets
+        ├── font/           # Font files
+        ├── img/            # Images and SVGs
+        ├── js/             # Javascript libraries and scripts
     ├── views/     
-        ├── partials/           # Handlebars HTML partials that are included / extended
-        └── templates/          # Handlebars HTML files, one per page on the site.
+        ├── partials/       # Handlebars HTML partials that are included / extended
+        └── templates/      # Handlebars HTML files, one per page on the site.
 ```
 
 [browsersync]: http://www.browsersync.io/

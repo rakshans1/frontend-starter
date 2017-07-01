@@ -20,6 +20,7 @@ module.exports = {
   },
   plugins: [
     new WebpackMd5Hash(),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin(GLOBALS),
     new ExtractTextPlugin('assets/css/main.css'),
