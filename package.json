@@ -4,11 +4,7 @@
   "description": "Frontend boilerplate for local frontend web development.",
   "author": "Rakshan Shetty",
   "license": "ISC",
-  "keywords": [
-    "boilerplate",
-    "starterkit",
-    "webpack"
-  ],
+  "keywords": ["boilerplate", "starterkit", "webpack"],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
