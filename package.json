@@ -4,7 +4,11 @@
   "description": "Frontend boilerplate for local frontend web development.",
   "author": "Rakshan Shetty",
   "license": "ISC",
-  "keywords": ["boilerplate", "starterkit", "webpack"],
+  "keywords": [
+    "boilerplate",
+    "starterkit",
+    "webpack"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,7 +16,7 @@
     "build": "gulp build:optimized"
   },
   "dependencies": {
-    "bootstrap": "4.0.0-alpha.6"
+    "bootstrap": "4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
