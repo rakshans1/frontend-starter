@@ -12,7 +12,7 @@
     "build": "gulp build:optimized"
   },
   "dependencies": {
-    "bootstrap": "4.0.0-alpha.6"
+    "bootstrap": "4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
