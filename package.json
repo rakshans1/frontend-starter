@@ -50,7 +50,7 @@
     "url-loader": "^0.5.9",
     "webpack": "3.0.0",
     "webpack-dev-middleware": "^1.11.0",
-    "webpack-dev-server": "^2.5.0",
+    "webpack-dev-server": "^3.1.11",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-md5-hash": "^0.0.5",
     "webpack-visualizer-plugin": "^0.1.11"
